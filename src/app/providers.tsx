@@ -1,8 +1,22 @@
 // app/providers.tsx
 "use client";
 
-import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  return <NextUIProvider>{children}</NextUIProvider>;
+import { NextUIProvider } from "@nextui-org/react";
+import { type PropsWithChildren } from "react";
+
+export function Providers({ children }: PropsWithChildren) {
+  return (
+    <NextUIProvider>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+      </NextThemesProvider>
+    </NextUIProvider>
+  );
 }
